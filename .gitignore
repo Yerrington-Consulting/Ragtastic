@@ -1,0 +1,45 @@
+# Node modules
+/node_modules/
+
+# Distribution / build outputs
+/client/dist/
+/electron/dist/
+/electron/app-dist/
+/electron/build/
+
+# Python virtual environments
+/server/venv/
+
+# Python byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs and databases
+*.log
+*.sqlite
+/server/chat.db
+
+# Development environment files
+.env
+.dockerenv
+
+# Operating system generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.sublime-workspace
+
