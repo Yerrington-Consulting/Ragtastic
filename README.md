@@ -43,5 +43,5 @@ For more information, please visit our [website](https://www.yerrington.net) or 
 
 ---
 
-Stay tuned for more updates as we continue to build out more features and expand the capabilities of Ragtastic!
+Stay tuned for more updates as we continue to build out more features and expand the capabilities of Ragtastic! test!
 
