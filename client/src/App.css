@@ -1,0 +1,75 @@
+#root {
+    margin: 0 auto; /* Center the root element */
+    max-width: 100%; /* Optional based on your design needs */
+    width: 100%; /* Full width to use all available space */
+    padding: 2rem; /* Consistent padding */
+    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji; /* Default font family */
+    font-size: 1rem; /* Base font size */
+    line-height: 1.5;
+    overflow-x: hidden; /* Ensures no horizontal scroll */
+} 
+h1 {
+    font-size: 2rem; /* Larger headings */
+}
+
+h2 {
+    font-size: 1.5rem; /* Medium headings */
+}
+
+p {
+    font-size: 1rem; /* Paragraph, default body text size */
+}
+
+.logo {
+    height: 6em; /* You can keep specific sizes for non-text elements */
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+
+.logo:hover {
+    filter: drop-shadow(0 0 2em #4c4c4caa);
+}
+
+.logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+.card {
+    padding: 2em; /* Card padding */
+}
+
+.read-the-docs {
+    color: #888; /* Less emphasis color */
+    font-size: 0.875rem; /* Smaller text */
+}
+
+@media (max-width: 768px) {
+    :root {
+        font-size: 14px; /* Reduce base font size on smaller screens */
+    }
+}
+
+

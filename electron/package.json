@@ -1,0 +1,46 @@
+{
+  "name": "Ragtastic",
+  "author": "David Yerrington",
+  "description": "Ragtastic is a self-contained app that combines the power of a local vector database with LLMs and prompt engineering.",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.2",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --publish=never"
+  },
+  "build": {
+    "mac": {
+      "icon": "build/icons/mac/icon.icns",
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+
+    "win": {
+        "icon": "build/icons/win/icon.ico",
+        "target": [
+          {
+            "target": "nsis",
+            "arch": [
+              "x64",
+              "ia32"
+            ]
+          }
+        ]
+      }
+
+  }
+}
