@@ -11,7 +11,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/Yerrington-Consulting/Ragtastic">
-    <img src="https://github.com/Yerrington-Consulting/Ragtastic/assets/2257834/88e18383-6298-4bce-b1e5-4b66eeb9798d">
+    <img src="https://github.com/Yerrington-Consulting/Ragtastic/assets/2257834/60d92550-d03c-451d-92de-0d8ecc006a09" alt="Ragtastic Logo" width="200">
+
   </a>
 
   <h3 align="center">Ragtastic</h3>
@@ -28,10 +29,9 @@
     ·
     <a href="https://github.com/Yerrington-Consulting/Ragtastic/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
     ·
-    <a href="https://discord.gg/vXvtPa4qMh">Join Our Discord</a>
+    <a href="https://discord.gg/vXvtPa4qMh"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/discord.svg" width="20" height="20" style="vertical-align: middle;" /> Join our Discord</a>
   </p>
 </div>
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -61,7 +61,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Ragtastic Screen Shot][product-screenshot]](https://example.com)
+![Ragtastic Screen Shot](https://github.com/Yerrington-Consulting/Ragtastic/assets/2257834/88e18383-6298-4bce-b1e5-4b66eeb9798d)
 
 Ragtastic is designed to simplify the development of Retrieval-augmented generation (RAG) applications, making it easy to integrate large language models and vector databases through an intuitive UI. Whether you're a developer looking to prototype AI interactions or a data professional aiming to build generative search apps, Ragtastic provides the essential tools to enhance your AI-driven solutions efficiently.
 
