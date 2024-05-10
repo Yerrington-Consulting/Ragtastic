@@ -1,47 +1,125 @@
-# Ragtastic
+<a name="readme-top"></a>
 
-Ragtastic simplifies the development of Retrieval-augmented generation (RAG) applications, making it easy to integrate large language models and vector databases through an intuitive UI. Designed for data professionals and developers alike, Ragtastic accelerates the prototyping and scaling of generative search apps.
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![Apache 2.0 License][license-shield]][license-url]
 
-![Ragtastic Interface](https://github.com/Yerrington-Consulting/Ragtastic/assets/2257834/88e18383-6298-4bce-b1e5-4b66eeb9798d)
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/Yerrington-Consulting/Ragtastic">
+    <img src="https://github.com/Yerrington-Consulting/Ragtastic/assets/2257834/88e18383-6298-4bce-b1e5-4b66eeb9798d">
+  </a>
 
-## Project Status
-Ragtastic is currently in its alpha phase, under active development. We're working on core features and setting up initial builds. We're inviting users to test our basic UI on various platforms to ensure compatibility and gather feedback for further refinement.
+  <h3 align="center">Ragtastic</h3>
 
-### Features Under Development
-- **Chat Session Management**: Manage chat sessions using popular LLMs like OpenAI's GPT models, Vertex AI, and Claude.
-- **Data Import**: Import your data into a collection for real-time querying alongside chat sessions.
-- **Dynamic Prompt Configuration**: Easily adjust the prompts used in chat sessions to optimize the interaction between users and the vector database.
-- **Cross-Platform Compatibility**: We're building Ragtastic to work seamlessly on Mac, Windows, and Linux.
+  <p align="center">
+    Easily prototype and scale Retrieval-augmented generation apps with Ragtastic.
+    <br />
+    <a href="https://github.com/Yerrington-Consulting/Ragtastic"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Yerrington-Consulting/Ragtastic">View Demo</a>
+    ·
+    <a href="https://github.com/Yerrington-Consulting/Ragtastic/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/Yerrington-Consulting/Ragtastic/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    ·
+    <a href="https://discord.gg/vXvtPa4qMh">Join Our Discord</a>
+  </p>
+</div>
 
-## Upcoming Features
-- Integration with OpenAI API models (GPT-3.x, GPT-4.x)
-- Support for Vector Database (e.g., ChromaDB)
-- Enhanced chat session management tools
-- User-friendly prompt/RAG configuration tools
-- Desktop builds for Mac, Windows, and Linux
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Technology Stack
-- **Backend**: FastAPI for robust API development.
-- **Frontend**: React, utilizing Vite for fast builds and MaterialUI for sleek, intuitive user interfaces.
-- **Desktop Application**: ElectronJS, enabling native desktop functionalities across different operating systems.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## Getting Involved
-We highly value community contributions and feedback. Whether you're a developer interested in the bleeding edge of AI applications or a data professional looking to streamline your workflows, here’s how you can contribute:
+[![Ragtastic Screen Shot][product-screenshot]](https://example.com)
 
-- **Testing**: Help us by testing the application on different systems and report any issues or suggestions.
-- **Feature Suggestions**: Have ideas on how to improve Ragtastic? We're open to your suggestions!
-- **Code Contributions**: Check out our [contribution guidelines](LINK_TO_CONTRIBUTION_GUIDELINES) for more details on submitting pull requests.
+Ragtastic is designed to simplify the development of Retrieval-augmented generation (RAG) applications, making it easy to integrate large language models and vector databases through an intuitive UI. Whether you're a developer looking to prototype AI interactions or a data professional aiming to build generative search apps, Ragtastic provides the essential tools to enhance your AI-driven solutions efficiently.
 
-## Installation
-Instructions on how to install Ragtastic will be provided once we have stable builds available for all targeted platforms.
+### Built With
 
-## License
-Ragtastic is made available under the MIT License. See the [LICENSE](LINK_TO_LICENSE) file for more details.
+This section lists any major frameworks/libraries used to bootstrap your project:
+* [FastAPI](https://fastapi.tiangolo.com/)
+* [React](https://reactjs.org/)
+* [Vite](https://vitejs.dev/)
+* [Material-UI](https://mui.com/)
+* [ElectronJS](https://www.electronjs.org/)
 
-## Contact Us
-For more information, please visit our [website](https://www.yerrington.net) or contact us directly through our GitHub project page.
+<!-- GETTING STARTED -->
+## Getting Started
 
----
+To get a local copy up and running follow these simple steps.
 
-Stay tuned for more updates as we continue to build out more features and expand the capabilities of Ragtastic! test!
+### Prerequisites
 
+* npm
+  ```sh
+  npm install npm@latest -g
+Installation
+Clone the repo
+sh
+Copy code
+git clone https://github.com/Yerrington-Consulting/Ragtastic.git
+Install NPM packages
+sh
+Copy code
+npm install
+<!-- USAGE EXAMPLES -->
+Usage
+
+Use Ragtastic to manage chat sessions, configure prompts dynamically, and integrate with vector databases for enhanced user queries. For more examples, refer to the Documentation.
+
+<!-- ROADMAP -->
+Roadmap
+
+ Initial Release with basic chat session management
+ Integration with OpenAI API models (GPT-3.x, GPT-4.x)
+ Support for Vector Database (ChromaDB)
+ Cross-platform builds for Mac, Windows, and Linux
+See the open issues for a full list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+<!-- LICENSE -->
+License
+
+Distributed under the MIT License. See LICENSE.txt for more information.
+
+<!-- CONTACT -->
