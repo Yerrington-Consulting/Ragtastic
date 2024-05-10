@@ -172,7 +172,7 @@ Use Ragtastic to manage chat sessions, configure prompts dynamically, and integr
 - [ ] Support for Vector Database (ChromaDB)
 - [ ] Cross-platform builds for Mac, Windows, and Linux
 
-See the [open issues](./issues) for a full list of proposed features (and known issues).
+See the [open issues](/issues) for a full list of proposed features (and known issues) or come to our [Discord #feature-requests](https://discord.gg/vXvtPa4qMh) channel.
 
 <!-- CONTRIBUTING -->
 ### Contributing
