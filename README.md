@@ -97,13 +97,13 @@ yarn install
 
 #### Yarn Scripts
 
-| Command            | Description | Emoji Representation |
-| ------------------ | ----------- | ------------------- |
-| `yarn dev`         | Starts the development server using Vite. | 🚀 |
-| `yarn build:web`   | Builds the web version of the application with specific Vite config. | 🌐 |
-| `yarn build:electron` | Builds the Electron version of the application with specific Vite config. | 🖥️ |
-| `yarn lint`        | Runs ESLint to check for code issues in `.js` and `.jsx` files. | 🔍 |
-| `yarn preview`     | Serves the built app for testing with Vite preview. | 📦 |
+| Command            | Description | 
+| ------------------ | ----------- |
+| `yarn dev`         | 🚀 Starts the development server using Vite. |
+| `yarn build:web`   | 🌐 Builds the web version of the application with specific Vite config. |
+| `yarn build:electron` | 🖥️ Builds the Electron version of the application with specific Vite config. |
+| `yarn lint`        | 🔍 Runs ESLint to check for code issues in `.js` and `.jsx` files. |
+| `yarn preview`     | 📦 Serves the built app for testing with Vite preview. |
 
 
 ### Server
