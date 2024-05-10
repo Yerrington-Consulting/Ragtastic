@@ -79,14 +79,14 @@ This section lists any major frameworks/libraries used to bootstrap your project
 
 There are several ways to get started working with Ragtastic.  You can use one of our release builds listed here.  To get a local copy up and running follow these simple steps.
 
-### Prerequisites
+## Prerequisites
 
 Installation
 Clone the repo
    ```bash
    git clone https://github.com/Yerrington-Consulting/Ragtastic.git
    ```
-#### Client
+### Client
 
 Install Packages
 
@@ -95,7 +95,18 @@ From the `Ragtastic/client` directory, install the client packages.
 yarn install
 ```
 
-#### Server
+#### Yarn Scripts
+
+| Command            | Description | Emoji Representation |
+| ------------------ | ----------- | ------------------- |
+| `yarn dev`         | Starts the development server using Vite. | 🚀 |
+| `yarn build:web`   | Builds the web version of the application with specific Vite config. | 🌐 |
+| `yarn build:electron` | Builds the Electron version of the application with specific Vite config. | 🖥️ |
+| `yarn lint`        | Runs ESLint to check for code issues in `.js` and `.jsx` files. | 🔍 |
+| `yarn preview`     | Serves the built app for testing with Vite preview. | 📦 |
+
+
+### Server
 
 **Setting Up the Python Environment**
 
@@ -111,11 +122,11 @@ From the `Ragtastic/server` directory, create a separate environment (highly rec
 **Create a Virtual Environment**
 Navigate to the project directory where the requirements.txt is located and create a virtual environment using:
 
-##### For Windows
+#### For Windows
 ```bash
 python -m venv venv
 ```
-##### For macOS and Linux
+#### For macOS and Linux
 ```bash
 python3 -m venv venv
 ````
@@ -123,11 +134,11 @@ python3 -m venv venv
 **Activate the Virtual Environment**
 Before you install dependencies or run the application, activate the virtual environment:
 
-##### For Windows
+#### For Windows
 ```bash
 .\venv\Scripts\activate
 ```
-##### For macOS and Linux
+#### For macOS and Linux
 ```bash
 source venv/bin/activate
 ```
