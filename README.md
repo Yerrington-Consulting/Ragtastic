@@ -77,50 +77,113 @@ This section lists any major frameworks/libraries used to bootstrap your project
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+There are several ways to get started working with Ragtastic.  You can use one of our release builds listed here.  To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-* npm
-  ```sh
-  npm install npm@latest -g
 Installation
 Clone the repo
-sh
-Copy code
-git clone https://github.com/Yerrington-Consulting/Ragtastic.git
-Install NPM packages
-sh
-Copy code
-npm install
+   ```bash
+   git clone https://github.com/Yerrington-Consulting/Ragtastic.git
+   ```
+#### Client
+
+Install Packages
+
+From the `Ragtastic/client` directory, install the client packages.
+```bash
+yarn install
+```
+
+#### Server
+
+**Setting Up the Python Environment**
+
+For this project, we recommend using a virtual environment to isolate the package dependencies. Follow these steps to set up your environment and run the application.
+
+Prerequisites
+> Python: Ensure you have Python installed on your machine. You can download it from [python.org](http://python.org) or use a package manager on your operating system.
+
+> Soon, we will add the `requirements.txt`
+
+From the `Ragtastic/server` directory, create a separate environment (highly recommended).
+
+**Create a Virtual Environment**
+Navigate to the project directory where the requirements.txt is located and create a virtual environment using:
+
+##### For Windows
+```bash
+python -m venv venv
+```
+##### For macOS and Linux
+```bash
+python3 -m venv venv
+````
+
+**Activate the Virtual Environment**
+Before you install dependencies or run the application, activate the virtual environment:
+
+##### For Windows
+```bash
+.\venv\Scripts\activate
+```
+##### For macOS and Linux
+```bash
+source venv/bin/activate
+```
+
+**Install Dependencies**
+
+With the virtual environment activated, install the project dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+**Running the Application**
+
+With the virtual environment set up and dependencies installed, you are ready to run the application.
+
+**Start the FastAPI server**
+To run the FastAPI application, use the following command:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+**Deactivating the Virtual Environment**
+When you're done working with the application, you can deactivate the virtual environment by running:
+
+```bash
+deactivate
+```
+This command will return you to your system’s default Python interpreter.
+
+
 <!-- USAGE EXAMPLES -->
-Usage
+### Usage
 
 Use Ragtastic to manage chat sessions, configure prompts dynamically, and integrate with vector databases for enhanced user queries. For more examples, refer to the Documentation.
 
 <!-- ROADMAP -->
-Roadmap
+## Roadmap
 
- Initial Release with basic chat session management
- Integration with OpenAI API models (GPT-3.x, GPT-4.x)
- Support for Vector Database (ChromaDB)
- Cross-platform builds for Mac, Windows, and Linux
-See the open issues for a full list of proposed features (and known issues).
+- [ ] Initial Release with basic chat session management
+- [ ] Integration with OpenAI API models (GPT-3.x, GPT-4.x)
+- [ ] Support for Vector Database (ChromaDB)
+- [ ] Cross-platform builds for Mac, Windows, and Linux
+
+See the [open issues](./issues) for a full list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
-Contributing
+### Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Fork the Project
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-Push to the Branch (git push origin feature/AmazingFeature)
-Open a Pull Request
-<!-- LICENSE -->
-License
-
-Distributed under the MIT License. See LICENSE.txt for more information.
+### Fork the Project
+1. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+1. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+1. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Open a Pull Request
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
