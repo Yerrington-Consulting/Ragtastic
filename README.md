@@ -122,4 +122,16 @@ License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-<!-- CONTACT -->
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/Yerrington-Consulting/Ragtastic.svg?style=for-the-badge
+[contributors-url]: https://github.com/Yerrington-Consulting/Ragtastic/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Yerrington-Consulting/Ragtastic.svg?style=for-the-badge
+[forks-url]: https://github.com/Yerrington-Consulting/Ragtastic/network/members
+[stars-shield]: https://img.shields.io/github/stars/Yerrington-Consulting/Ragtastic.svg?style=for-the-badge
+[stars-url]: https://github.com/Yerrington-Consulting/Ragtastic/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Yerrington-Consulting/Ragtastic.svg?style=for-the-badge
+[issues-url]: https://github.com/Yerrington-Consulting/Ragtastic/issues
+[license-shield]: https://img.shields.io/github/license/Yerrington-Consulting/Ragtastic.svg?style=for-the-badge
+[license-url]: https://github.com/Yerrington-Consulting/Ragtastic/blob/master/LICENSE.txt
