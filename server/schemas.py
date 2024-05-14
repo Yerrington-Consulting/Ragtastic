@@ -1,6 +1,7 @@
 # server/schemas.py
 
 from pydantic import BaseModel
+from typing import Optional
 from datetime import datetime
 
 class MessageBase(BaseModel):
@@ -14,6 +15,8 @@ class Message(MessageBase):
     created_at: datetime
     chat_session_id: int
     content: str
+    user_id: Optional[int] = None  # Allow user_id to be None
+    llm_id: Optional[int] = None  # Allow llm_id to be None
 
     class Config:
         from_attributes = True  # Updated for Pydantic V2
@@ -34,7 +37,6 @@ class ChatSession(ChatSessionBase):
 class ChatSessionWithFirstMessage(ChatSessionBase):
     id: int
     created_at: datetime
-    content: str
     first_message_content: str
 
     class Config:

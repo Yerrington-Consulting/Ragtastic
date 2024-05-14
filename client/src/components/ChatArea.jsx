@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+// src/components/ChatArea.jsx
+
+import React, { useState } from 'react';
 import { Box, IconButton, List, ListItem, ListItemAvatar, ListItemText, Avatar, TextareaAutosize, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { styled } from '@mui/material/styles';
-import { useChatWebSocket } from '../contexts/ChatWebSocketProvider'; // Adjust import path as necessary
+import { useChatWebSocket } from '../contexts/ChatWebSocketProvider'; 
 
 const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
     width: '100%',
@@ -30,8 +32,7 @@ const SendButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const ChatMessage = ({ message }) => {
-    const isLLMResponse = message.type === 'llm_response';
-    const content = message.content || ''; // Guard against undefined content
+    const isLLMResponse = message.llm_id !== null;
     const label = isLLMResponse ? "ChatGPT" : "You";
 
     return (
@@ -48,7 +49,7 @@ const ChatMessage = ({ message }) => {
                             {label}
                         </Typography>
                         <Typography component="span" variant="body2" sx={{ whiteSpace: 'pre-line' }}>
-                            {content}
+                            {message.content}
                         </Typography>
                     </>
                 } 
@@ -58,23 +59,23 @@ const ChatMessage = ({ message }) => {
     );
 };
 
-const ChatArea = ({ messages: initialMessages, sendMessage }) => {
-    const { messages, setInitialMessages } = useChatWebSocket();
+const ChatArea = ({ sessionId }) => {
+    const { messages, sendMessage, addMessage } = useChatWebSocket();
     const [input, setInput] = useState('');
-
-    // Set initial messages when the component mounts or when initialMessages change
-    useEffect(() => {
-        setInitialMessages(initialMessages);
-    }, [initialMessages, setInitialMessages]);
+    const [currentLLMId, setCurrentLLMId] = useState(1);  // Default to the first LLM
 
     const handleSend = () => {
-        if (input.trim()) {
-            sendMessage({
+        if (input.trim() && sessionId !== null) {
+            const newMessage = {
                 action: "create",
                 content: input,
-                user_id: 'username' // Replace 'username' with actual user identifier if available
-            });
-            setInput(''); // Ensure input is cleared
+                user_id: 1,  // Default user_id to 1
+                session_id: sessionId,  // Use the current session ID
+                llm_id: currentLLMId  // Send the current LLM ID
+            };
+            sendMessage(newMessage);
+            addMessage({ ...newMessage, type: "user_message", is_final: true }); // Add message locally to avoid duplication
+            setInput(''); 
         }
     };
 

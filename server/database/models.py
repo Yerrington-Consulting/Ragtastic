@@ -16,6 +16,12 @@ class User(Base):
     username = Column(String, unique=True)
     messages = relationship('Message', back_populates='user')
 
+class LLM(Base):
+    __tablename__ = 'llms'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    messages = relationship('Message', back_populates='llm')
+
 class Message(Base):
     __tablename__ = 'messages'
     id = Column(Integer, primary_key=True)
@@ -23,5 +29,7 @@ class Message(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     user_id = Column(Integer, ForeignKey('users.id'))
     chat_session_id = Column(Integer, ForeignKey('chat_sessions.id'))
+    llm_id = Column(Integer, ForeignKey('llms.id'), nullable=True)  # Add llm_id field
     user = relationship('User', back_populates='messages')
     session = relationship('ChatSession', back_populates='messages')
+    llm = relationship('LLM', back_populates='messages', uselist=False)

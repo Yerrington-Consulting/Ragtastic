@@ -1,3 +1,5 @@
+// src/components/Toolbar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Box, Select, MenuItem, FormControl, InputLabel, Tooltip } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -12,20 +14,21 @@ const Toolbar = ({ onModelChange, onDataCollectionChange, models = {}, collectio
     const [selectedTab, setSelectedTab] = useState('chat');
 
     useEffect(() => {
-        if (selectedModel) {
-            onModelChange(selectedModel);
-        }
-        if (selectedCollection) {
-            onDataCollectionChange(selectedCollection);
-        }
-    }, [selectedModel, selectedCollection, onModelChange, onDataCollectionChange]);
+        setSelectedModel(models.current); // Update selected model when models.current changes
+    }, [models.current]);
+
+    useEffect(() => {
+        setSelectedCollection(collections.current); // Update selected collection when collections.current changes
+    }, [collections.current]);
 
     const handleModelChange = (event) => {
         setSelectedModel(event.target.value);
+        onModelChange(event);
     };
 
     const handleCollectionChange = (event) => {
         setSelectedCollection(event.target.value);
+        onDataCollectionChange(event);
     };
 
     const handleTabChange = (event, newTab) => {
@@ -45,8 +48,8 @@ const Toolbar = ({ onModelChange, onDataCollectionChange, models = {}, collectio
                     onChange={handleModelChange}
                     label="Model"
                 >
-                    {(models.options || []).map((model) => (
-                        <MenuItem key={model} value={model}>{model}</MenuItem>
+                    {models.options.map((model, index) => (
+                        <MenuItem key={index} value={index + 1}>{model}</MenuItem>  // Use index + 1 as llm_id
                     ))}
                 </Select>
             </FormControl>

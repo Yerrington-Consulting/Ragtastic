@@ -31,3 +31,4 @@ async def websocket_endpoint(websocket: WebSocket):
         await heartbeat_task
         manager.disconnect(websocket)
         logging.info("WebSocket connection cleanly terminated.")
+

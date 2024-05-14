@@ -55,11 +55,13 @@ class ChatManager:
     async def mock_chatgpt_stream_response(self, input_text):
         # Simulate processing input text and generating a response in chunks
         words = input_text.split()
+        accumulated_response = ""
         for i in range(1, 101):  # Simulating a count to 100 as your example
             chunk = f"{i}, "
+            accumulated_response += chunk
             is_final = i == 100
             await asyncio.sleep(0.05)  # Simulate processing time
-            yield (chunk, is_final)
+            yield (chunk, is_final, accumulated_response if is_final else None)
 
     async def handle_new_message(self, data: Dict, websocket: WebSocket):
         action = data.get("action")
@@ -70,10 +72,11 @@ class ChatManager:
         if action == "create":
             session_id = data.get("session_id")
             content = data.get("content")
-            user_id = data.get("user_id")
+            user_id = data.get("user_id", 1)  # Default to user_id 1 if not provided
+            llm_id = data.get("llm_id")
 
-            if not all([content, user_id]):
-                await self.send_message("Error: Missing content or user ID", websocket)
+            if not content:
+                await self.send_message("Error: Missing content", websocket)
                 return
 
             if not session_id:
@@ -82,20 +85,46 @@ class ChatManager:
                 self.db.commit()
                 session_id = session.id
                 logging.info(f"New session created with ID: {session_id}")
+            else:
+                session = self.db.query(ChatSession).filter(ChatSession.id == session_id).first()
+                if not session:
+                    await self.send_message(f"Error: Session with ID {session_id} not found", websocket)
+                    return
 
+            # Add the new user message
             new_message = Message(chat_session_id=session_id, content=content, user_id=user_id)
             self.db.add(new_message)
             self.db.commit()
 
+            # Send the user message to the client
+            await self.send_message(json.dumps({
+                "content": content,
+                "type": "user_message",
+                "user_id": user_id,
+                "session_id": session_id,
+                "is_final": True
+            }), websocket)
+
+            # Generate and send the mock LLM response
             async_generator = self.mock_chatgpt_stream_response(content)
+            accumulated_response = ""
             try:
-                async for chunk, is_final in async_generator:
-                    await self.send_message(json.dumps({
+                async for chunk, is_final, full_response in async_generator:
+                    accumulated_response += chunk
+                    llm_message = {
                         "content": chunk,
                         "type": "llm_response",
-                        "is_final": is_final
-                    }), websocket)
-                    if is_final:
+                        "is_final": is_final,
+                        "session_id": session_id,
+                        "llm_id": llm_id
+                    }
+                    await self.send_message(json.dumps(llm_message), websocket)
+
+                    # Save the LLM response to the database only when complete
+                    if is_final and full_response is not None:
+                        llm_message_db = Message(chat_session_id=session_id, content=full_response, user_id=None, llm_id=llm_id)
+                        self.db.add(llm_message_db)
+                        self.db.commit()
                         break
             except Exception as e:
                 logging.error(f"Error during message streaming: {e}")
@@ -103,13 +132,12 @@ class ChatManager:
     async def process_message(self, data: Dict, websocket: WebSocket):
         await self.handle_new_message(data, websocket)
 
-    # Add the get_chat_sessions method
     def get_chat_sessions(self):
         chat_sessions = self.db.query(ChatSession).all()
         return chat_sessions
 
-    # Add the get_messages method
     def get_messages(self, session_id: int):
+        print("\n\n\nget_messages called with session_id: ", session_id, "\n\n\n")
         messages = self.db.query(Message).filter(Message.chat_session_id == session_id).all()
         return messages
 
@@ -130,4 +158,5 @@ class ChatManager:
             subquery.c.first_message_id == Message.id
         )
 
-        return query.all()
+        results = query.all()
+        return [(session, first_message_content) for session, first_message_content in results]

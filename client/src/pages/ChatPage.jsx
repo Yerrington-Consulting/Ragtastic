@@ -12,7 +12,7 @@ const ChatPage = () => {
     const { sendMessage, messages, setInitialMessages } = useChatWebSocket();
 
     const [models, setModels] = useState({
-        current: 'GPT-4',
+        current: 1, // Set initial model ID
         options: ['GPT-3.5', 'GPT-4', 'GPT-3']
     });
     const [collections, setCollections] = useState({
@@ -49,6 +49,7 @@ const ChatPage = () => {
         .then(data => {
             setSelectedSession(data.id);
             setInitialMessages([]);
+            setModels(prevModels => ({ ...prevModels, current: 1 })); // Reset model to default
         })
         .catch(error => console.error('Error creating new chat session: ', error));
     };
@@ -70,7 +71,10 @@ const ChatPage = () => {
             <Grid item sx={{ width: 250, minWidth: 250, maxWidth: 250, height: '100vh', display: 'flex', flexShrink: 0 }}>
                 <ChatSidebar
                     onNewChat={handleNewChat}
-                    onSelectSession={setSelectedSession}
+                    onSelectSession={(sessionId) => {
+                        setSelectedSession(sessionId);
+                        setModels(prevModels => ({ ...prevModels, current: 1 })); // Reset model to default
+                    }}
                 />
             </Grid>
             <Grid item xs sx={{ flexGrow: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -80,7 +84,7 @@ const ChatPage = () => {
                     onModelChange={handleModelChange}
                     onDataCollectionChange={handleCollectionChange}
                 />
-                <ChatArea messages={messages} sendMessage={sendMessage} />
+                <ChatArea messages={messages} sendMessage={sendMessage} sessionId={selectedSession} />
             </Grid>
         </Grid>
     );
