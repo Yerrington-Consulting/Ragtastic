@@ -21,7 +21,6 @@ export const ChatWebSocketProvider = ({ children }) => {
                     let updated = false;
                     const updatedMessages = prevMessages.map(message => {
                         if (message.type === 'llm_response' && !message.is_final) {
-                            // Only update if it's the same type and not finalized
                             updated = true;
                             return {
                                 ...message,
@@ -31,18 +30,17 @@ export const ChatWebSocketProvider = ({ children }) => {
                         }
                         return message;
                     });
-        
+
                     if (!updated) {
-                        // If no update has been made, it means we need to add a new message
                         updatedMessages.push(data);
                     }
-        
+
                     return updatedMessages;
                 });
             } else if (data.type !== 'heartbeat') {
                 setMessages(prevMessages => [...prevMessages, data]);
             }
-        };        
+        };
 
         ws.onclose = () => console.log("Disconnected from WebSocket");
         ws.onerror = (error) => console.error("WebSocket error:", error);
@@ -56,20 +54,23 @@ export const ChatWebSocketProvider = ({ children }) => {
     const sendMessage = useCallback((data) => {
         if (socket?.readyState === WebSocket.OPEN) {
             socket.send(JSON.stringify(data));
-            // Optimistically add user's message
             if (data.action === "create") {
                 setMessages(prevMessages => [...prevMessages, {
                     content: data.content,
                     user_id: data.user_id,
-                    type: 'user_message', // Ensure this type is handled in ChatMessage
+                    type: 'user_message',
                     is_final: true
                 }]);
             }
         }
     }, [socket]);
 
+    const setInitialMessages = useCallback((initialMessages) => {
+        setMessages(initialMessages);
+    }, []);
+
     return (
-        <ChatWebSocketContext.Provider value={{ messages, sendMessage }}>
+        <ChatWebSocketContext.Provider value={{ messages, sendMessage, setInitialMessages }}>
             {children}
         </ChatWebSocketContext.Provider>
     );

@@ -5,9 +5,11 @@ import ChatArea from '../components/ChatArea';
 import ChatSidebar from '../components/ChatSidebar';
 import { Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useChatWebSocket } from '../contexts/ChatWebSocketProvider'; // Adjust the path as necessary
 
 const ChatPage = () => {
     const theme = useTheme();
+    const { sendMessage, messages, setInitialMessages } = useChatWebSocket();
 
     const [models, setModels] = useState({
         current: 'GPT-4',
@@ -19,12 +21,13 @@ const ChatPage = () => {
     });
 
     const [selectedSession, setSelectedSession] = useState(null);
-    const [messages, setMessages] = useState([]);
 
     const fetchMessages = (sessionId) => {
         fetch(`http://localhost:8000/api/chat_sessions/${sessionId}/messages`)
             .then(response => response.json())
-            .then(data => setMessages(data))
+            .then(data => {
+                setInitialMessages(data); 
+            })
             .catch(error => console.error(`Error fetching messages: `, error));
     };
 
@@ -45,7 +48,7 @@ const ChatPage = () => {
         .then(response => response.json())
         .then(data => {
             setSelectedSession(data.id);
-            setMessages([]);
+            setInitialMessages([]);
         })
         .catch(error => console.error('Error creating new chat session: ', error));
     };
@@ -77,7 +80,7 @@ const ChatPage = () => {
                     onModelChange={handleModelChange}
                     onDataCollectionChange={handleCollectionChange}
                 />
-                <ChatArea messages={messages} />
+                <ChatArea messages={messages} sendMessage={sendMessage} />
             </Grid>
         </Grid>
     );

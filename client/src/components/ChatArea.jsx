@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, IconButton, List, ListItem, ListItemAvatar, ListItemText, Avatar, TextareaAutosize, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import PersonIcon from '@mui/icons-material/Person';
@@ -58,9 +58,14 @@ const ChatMessage = ({ message }) => {
     );
 };
 
-const ChatArea = () => {
-    const { messages, sendMessage } = useChatWebSocket();
+const ChatArea = ({ messages: initialMessages, sendMessage }) => {
+    const { messages, setInitialMessages } = useChatWebSocket();
     const [input, setInput] = useState('');
+
+    // Set initial messages when the component mounts or when initialMessages change
+    useEffect(() => {
+        setInitialMessages(initialMessages);
+    }, [initialMessages, setInitialMessages]);
 
     const handleSend = () => {
         if (input.trim()) {
