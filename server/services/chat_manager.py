@@ -5,6 +5,7 @@ from starlette.websockets import WebSocketState
 from typing import List, Dict
 import logging, random, asyncio, json
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from database.database import SessionLocal
 from database.models import Message, ChatSession
 
@@ -103,11 +104,30 @@ class ChatManager:
         await self.handle_new_message(data, websocket)
 
     # Add the get_chat_sessions method
-    def get_chat_sessions(self, db: Session):
-        chat_sessions = db.query(ChatSession).all()
+    def get_chat_sessions(self):
+        chat_sessions = self.db.query(ChatSession).all()
         return chat_sessions
 
     # Add the get_messages method
-    def get_messages(self, db: Session, session_id: int):
-        messages = db.query(Message).filter(Message.chat_session_id == session_id).all()
+    def get_messages(self, session_id: int):
+        messages = self.db.query(Message).filter(Message.chat_session_id == session_id).all()
         return messages
+
+    def get_chat_sessions_with_first_message(self):
+        subquery = self.db.query(
+            Message.chat_session_id,
+            func.min(Message.id).label("first_message_id")
+        ).group_by(Message.chat_session_id).subquery()
+
+        query = self.db.query(
+            ChatSession,
+            Message.content.label("first_message_content")
+        ).join(
+            subquery,
+            ChatSession.id == subquery.c.chat_session_id
+        ).join(
+            Message,
+            subquery.c.first_message_id == Message.id
+        )
+
+        return query.all()
