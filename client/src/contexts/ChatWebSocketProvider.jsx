@@ -16,31 +16,30 @@ export const ChatWebSocketProvider = ({ children }) => {
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
+          
             if (data.type === 'llm_response') {
-                setMessages(prevMessages => {
-                    let updated = false;
-                    const updatedMessages = prevMessages.map(message => {
-                        if (message.type === 'llm_response' && !message.is_final) {
-                            updated = true;
-                            return {
-                                ...message,
-                                content: message.content + data.content,
-                                is_final: data.is_final
-                            };
-                        }
-                        return message;
-                    });
-
-                    if (!updated) {
-                        updatedMessages.push(data);
-                    }
-
-                    return updatedMessages;
-                });
+              setMessages((prevMessages) => {
+                const existingMessageIndex = prevMessages.findIndex(
+                  (message) =>
+                    message.type === 'llm_response' && !message.is_final
+                );
+          
+                if (existingMessageIndex !== -1) {
+                  const updatedMessages = [...prevMessages];
+                  updatedMessages[existingMessageIndex] = {
+                    ...prevMessages[existingMessageIndex],
+                    content: prevMessages[existingMessageIndex].content + data.content,
+                    is_final: data.is_final,
+                  };
+                  return updatedMessages;
+                } else {
+                  return [...prevMessages, data];
+                }
+              });
             } else if (data.type !== 'heartbeat') {
-                setMessages(prevMessages => [...prevMessages, data]);
+              setMessages((prevMessages) => [...prevMessages, data]);
             }
-        };
+          };
 
         ws.onclose = () => console.log("Disconnected from WebSocket");
         ws.onerror = (error) => console.error("WebSocket error:", error);
@@ -54,13 +53,15 @@ export const ChatWebSocketProvider = ({ children }) => {
     const sendMessage = useCallback((data) => {
         if (socket?.readyState === WebSocket.OPEN) {
             socket.send(JSON.stringify(data));
+
+            // I totally forgot why I added this in the first place.. leaving here for a few versions before removing..
             if (data.action === "create") {
-                setMessages(prevMessages => [...prevMessages, {
-                    content: data.content,
-                    user_id: data.user_id,
-                    type: 'user_message',
-                    is_final: true
-                }]);
+                // setMessages(prevMessages => [...prevMessages, {
+                //     content: data.content,
+                //     user_id: data.user_id,
+                //     type: 'user_message',
+                //     is_final: true
+                // }]);
             }
         }
     }, [socket]);

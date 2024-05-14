@@ -32,7 +32,7 @@ const SendButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const ChatMessage = ({ message }) => {
-    const isLLMResponse = message.llm_id !== null;
+    const isLLMResponse = message.type === "llm_response";
     const label = isLLMResponse ? "ChatGPT" : "You";
 
     return (
@@ -60,7 +60,7 @@ const ChatMessage = ({ message }) => {
 };
 
 const ChatArea = ({ sessionId }) => {
-    const { messages, sendMessage, addMessage } = useChatWebSocket();
+    const { messages, sendMessage } = useChatWebSocket();
     const [input, setInput] = useState('');
     const [currentLLMId, setCurrentLLMId] = useState(1);  // Default to the first LLM
 
@@ -71,11 +71,11 @@ const ChatArea = ({ sessionId }) => {
                 content: input,
                 user_id: 1,  // Default user_id to 1
                 session_id: sessionId,  // Use the current session ID
-                llm_id: currentLLMId  // Send the current LLM ID
+                llm_id: currentLLMId,  // Send the current LLM ID
+                type: "user_message" // Mark this message as a user message
             };
             sendMessage(newMessage);
-            addMessage({ ...newMessage, type: "user_message", is_final: true }); // Add message locally to avoid duplication
-            setInput(''); 
+            setInput('');  // Clear the input field after sending
         }
     };
 
