@@ -1,7 +1,10 @@
+# server/services/chat_manager.py
+
 from fastapi import WebSocket, WebSocketDisconnect
 from starlette.websockets import WebSocketState
 from typing import List, Dict
 import logging, random, asyncio, json
+from sqlalchemy.orm import Session
 from database.database import SessionLocal
 from database.models import Message, ChatSession
 
@@ -29,7 +32,6 @@ class ChatManager:
         else:
             logging.warning("WebSocket not found in active connections on disconnect.")
 
-
     async def send_message(self, message: str, websocket: WebSocket):
         if websocket.client_state == WebSocketState.CONNECTED:
             try:
@@ -45,7 +47,6 @@ class ChatManager:
             logging.warning("Attempted to send a message to an inactive or closed WebSocket.")
             self.disconnect(websocket)
 
-
     async def broadcast(self, message: str):
         for connection in list(self.active_connections):  # Use a copy of the list to manage changes during iteration
             await self.send_message(message, connection)
@@ -58,7 +59,6 @@ class ChatManager:
             is_final = i == 100
             await asyncio.sleep(0.05)  # Simulate processing time
             yield (chunk, is_final)
-
 
     async def handle_new_message(self, data: Dict, websocket: WebSocket):
         action = data.get("action")
@@ -101,3 +101,13 @@ class ChatManager:
 
     async def process_message(self, data: Dict, websocket: WebSocket):
         await self.handle_new_message(data, websocket)
+
+    # Add the get_chat_sessions method
+    def get_chat_sessions(self, db: Session):
+        chat_sessions = db.query(ChatSession).all()
+        return chat_sessions
+
+    # Add the get_messages method
+    def get_messages(self, db: Session, session_id: int):
+        messages = db.query(Message).filter(Message.chat_session_id == session_id).all()
+        return messages

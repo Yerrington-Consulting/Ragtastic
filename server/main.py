@@ -21,10 +21,14 @@ logging.basicConfig(level=logging.INFO)
 # Create FastAPI app
 app = FastAPI()
 
-# Add CORS middleware
+# Set up CORS
+origins = [
+    "http://localhost:3000",  # Adjust according to your React app's address and port
+    "http://localhost:5173",  # Add this if you're using Vite on port 5173
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
