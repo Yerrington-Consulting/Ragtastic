@@ -32,7 +32,7 @@ const SendButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const ChatMessage = ({ message }) => {
-    const isLLMResponse = message.type === "llm_response";
+    const isLLMResponse = message.type === "llm_response" || message.user_id != 1;
     const label = isLLMResponse ? "ChatGPT" : "You";
 
     return (
